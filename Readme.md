@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Егор Мирошниченко](https://up.htmlacademy.ru/javascript/29/user/2257983).
-* Наставник: `Неизвестно`.
+* Наставник: [НикитаСигов](https://htmlacademy.ru/profile/crazer).
 
 ---
 
