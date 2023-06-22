@@ -43,4 +43,3 @@ const dataPhoto = () => ({
 });
 
 const arrayPhoto = Array.from({length: 25}, dataPhoto);
-console.log(arrayPhoto);
