@@ -1,4 +1,5 @@
-import {random, randomElement} from './randomizer.js';
+import {random} from './randomizer.js';
+import {randomElement} from './randomizer.js';
 
 const DESCRIPTION = [
   'Это я отдыхаю у моря',
@@ -27,19 +28,25 @@ const NAMES = [
   'Мария',
 ];
 
-//Генератор фото
-const dataPhoto = () => ({
-  id: random(1, 25), //Должен быть счетчик
-  url: `photos/${random(1, 25)}.jpg`, //Цифры не должны повторяться
-  desription: randomElement(DESCRIPTION),
-  likes: random(15, 200),
-
-  comments: {
-    id: random(1, 100), //id не повторяются
-    avatar: `img/avatar-${random(1, 6)}.svg`,
-    message: randomElement(MESSAGE),
-    name: randomElement(NAMES),
-  },
+//Генератор комментариев
+const generateComments = (_, index) => ({
+  id: index + 1,
+  avatar: `img/avatar-${random(1, 6)}.svg`,
+  message: randomElement(MESSAGE),
+  name: randomElement(NAMES),
 });
 
-const arrayPhoto = Array.from({length: 25}, dataPhoto);
+const comments = Array.from({length: 25}, generateComments);
+
+//Генератор фото
+const generateDatasPhoto = (_, index) => ({
+  id: index + 1,
+  url: `photos/${index + 1}.jpg`,
+  desription: randomElement(DESCRIPTION),
+  likes: random(15, 200),
+  comment: randomElement(comments),
+});
+
+const arrayPhoto = Array.from({length: 25}, generateDatasPhoto);
+
+console.log(arrayPhoto);
