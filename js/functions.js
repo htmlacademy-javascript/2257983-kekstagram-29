@@ -7,11 +7,11 @@ const checkDay = (timeStart, timeEnd, meetingTimeStart, meetingDuration) => {
     return hours * minutesPerHours + minutes;
   };
 
-  return toMin(timeEnd) >= toMin(meetingTimeStart) + meetingDuration && toMin(timeStart) <= toMin(meetingTimeStart) ? true : false;
+  return toMin(timeEnd) >= toMin(meetingTimeStart) + meetingDuration && toMin(timeStart) <= toMin(meetingTimeStart);
 };
 
-// console.log('Тест 1 -' + checkDay('08:00', '17:30', '14:00', 90));
-// console.log('Тест 2 -' + checkDay('8:0', '10:0', '8:0', 120));
-// console.log('Тест 3 -' + checkDay('08:00', '14:30', '14:00', 90));
-// console.log('Тест 4 -' + checkDay('14:00', '17:30', '08:0', 90));
-// console.log('Тест 5 -' + checkDay('8:00', '17:30', '08:00', 900));
+// console.log('Тест 1 - ' + checkDay('08:00', '17:30', '14:00', 90));
+// console.log('Тест 2 - ' + checkDay('8:0', '10:0', '8:0', 120));
+// console.log('Тест 3 - ' + checkDay('08:00', '14:30', '14:00', 90));
+// console.log('Тест 4 - ' + checkDay('14:00', '17:30', '08:0', 90));
+// console.log('Тест 5 - ' + checkDay('8:00', '17:30', '08:00', 900));
