@@ -5,7 +5,7 @@ const checkDay = (timeStart, timeEnd, meetingTimeStart, meetingDuration) => {
     const minutesPerHours = 60;
 
     return hours * minutesPerHours + minutes;
-  };
+  }
 
   return toMin(timeEnd) >= toMin(meetingTimeStart) + meetingDuration && toMin(timeStart) <= toMin(meetingTimeStart);
 };

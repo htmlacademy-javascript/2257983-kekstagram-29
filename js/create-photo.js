@@ -49,4 +49,4 @@ const generateDatasPhoto = (_, index) => ({
 
 const arrayPhoto = Array.from({length: 25}, generateDatasPhoto);
 
-console.log(arrayPhoto);
+
