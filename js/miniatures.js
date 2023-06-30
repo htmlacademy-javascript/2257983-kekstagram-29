@@ -1,3 +1,5 @@
+import {arrayPhoto} from './create-photo.js';
+
 const createPictureList = (array) => {
   const pictureTemplate = document.querySelector('#picture').content;
   const pictureTemplateElement = pictureTemplate.querySelector('.picture');
@@ -11,12 +13,14 @@ const createPictureList = (array) => {
     img.src = url;
     img.alt = description;
     newElement.querySelector('.picture__likes').textContent = likes;
-    newElement.querySelector('.picture__comments').textContent = comments.length;
+    newElement.querySelector('.picture__comments').textContent = comments;
     pictureListFragment.appendChild(newElement);
   });
 
   pictureListElement.appendChild(pictureListFragment);
 
 };
+
+createPictureList(arrayPhoto);
 
 export {createPictureList};
