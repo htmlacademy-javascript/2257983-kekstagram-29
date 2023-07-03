@@ -8,12 +8,12 @@ const createPictureList = (array) => {
 
   array.forEach(({url, description, likes, comments}) => {
     const newElement = pictureTemplateElement.cloneNode(true);
-    const img = pictureTemplateElement.querySelector('.picture__img');
+    const img = newElement.querySelector('.picture__img');
 
     img.src = url;
     img.alt = description;
     newElement.querySelector('.picture__likes').textContent = likes;
-    newElement.querySelector('.picture__comments').textContent = comments;
+    newElement.querySelector('.picture__comments').textContent = comments.length;
     pictureListFragment.appendChild(newElement);
   });
 
