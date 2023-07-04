@@ -1,5 +1,4 @@
-import {random} from './randomizer.js';
-import {randomElement} from './randomizer.js';
+import {random, randomElement} from './utils.js';
 
 const DESCRIPTION = [
   'Это я отдыхаю у моря',

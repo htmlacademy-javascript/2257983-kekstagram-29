@@ -1,1 +1,2 @@
-import {createPictureList} from './miniatures.js';
+import './miniatures.js';
+import './big-photo.js';
