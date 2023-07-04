@@ -1,5 +1,4 @@
-import {random} from './randomizer.js';
-import {randomElement} from './randomizer.js';
+import {random, randomElement} from './utils.js';
 
 const DESCRIPTION = [
   'Это я отдыхаю у моря',
@@ -42,11 +41,11 @@ const comments = Array.from({length: 25}, generateComments);
 const generateDatasPhoto = (_, index) => ({
   id: index + 1,
   url: `photos/${index + 1}.jpg`,
-  desription: randomElement(DESCRIPTION),
+  description: randomElement(DESCRIPTION),
   likes: random(15, 200),
-  comment: randomElement(comments),
+  comments: randomElement(comments),
 });
 
 const arrayPhoto = Array.from({length: 25}, generateDatasPhoto);
 
-console.log(arrayPhoto);
+export {arrayPhoto};

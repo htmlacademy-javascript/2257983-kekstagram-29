@@ -1,1 +1,2 @@
-import './create-photo.js';
+import './miniatures.js';
+import './big-photo.js';
