@@ -1,28 +1,34 @@
-import {createPictureList} from './miniatures.js';
 import {pressEscButton} from './utils.js';
 
 //Попап
-const popUp = document.querySelector('.big-picture');
-const miniPicture = document.querySelectorAll('.picture');
+const bigPicture = document.querySelector('.big-picture');
 const escButton = document.querySelector('.big-picture__cancel');
 
 //Содержимое попапа
-const bigPictureImage = document.querySelector('.big-picture__img img');
-const bigPictureLikes = document.querySelector('.likes-count');
+const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
+const bigPictureLikes = bigPicture.querySelector('.likes-count');
+const bigPictureComments = bigPicture.querySelector('.social__comment-count');
+const bigPictureDescription = bigPicture.querySelector('.social__caption');
+// const socialComments = bigPicture.querySelector('.social__comments');
 
-miniPicture.forEach((photo) => { //Открываем фото
-  photo.addEventListener ('click', () => {
-    popUp.classList.remove('hidden');
-  });
-});
+//Содержимое комментариев
 
 escButton.addEventListener('click', () => { //Закрываем фото по клику
-  popUp.classList.add('hidden');
+  bigPicture.classList.add('hidden');
 });
 
 document.addEventListener('keydown', (evt) => { //Закрываем фото по Esc
   if(pressEscButton(evt)) {
     evt.preventDefault();
-    popUp.classList.add('hidden');
+    bigPicture.classList.add('hidden');
   }
 });
+
+const renderBigPhoto = (post) => {
+  bigPictureImage.src = post.url;
+  bigPictureLikes.textContent = post.likes;
+  bigPictureComments.textContent = post.comments.length;
+  bigPictureDescription.textContent = post.description;
+};
+
+export {renderBigPhoto};
