@@ -1,5 +1,5 @@
 import {arrayPhoto} from './create-photo.js';
-import {renderBigPhoto} from './big-photo.js';
+import {showBigPictures} from './big-photo.js';
 
 const createPictureList = (array) => {
   const pictureTemplate = document.querySelector('#picture').content;
@@ -16,12 +16,11 @@ const createPictureList = (array) => {
     img.alt = photo.description;
     newElement.querySelector('.picture__likes').textContent = photo.likes;
     newElement.querySelector('.picture__comments').textContent = photo.comments.length;
-    newElement.dataset.Id = photo.id;
     pictureListFragment.appendChild(newElement);
 
     newElement.addEventListener ('click', () => { //Открываем фото
       bigPicture.classList.remove('hidden');
-      renderBigPhoto(photo);
+      showBigPictures(photo);
     });
   });
 
