@@ -16,7 +16,7 @@ const bigPictureDescription = bigPicture.querySelector('.social__caption');
 //Содержимое комментариев
 const defaultComments = document.querySelector('.social__comments');
 const commentElement = document.querySelector('.social__comment');
-const loadCommentsButton = document.querySelector('.comments-loader');
+// const loadCommentsButton = document.querySelector('.comments-loader');
 
 escButton.addEventListener('click', () => { //Закрываем фото по клику
   bigPicture.classList.add('hidden');
@@ -26,6 +26,7 @@ document.addEventListener('keydown', (evt) => { //Закрываем фото п
   if(pressEscButton(evt)) {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
+
   }
 });
 
@@ -42,6 +43,8 @@ const renderOneComment = (data) => { //Создаем 1 комментарий
   comment.querySelector('.social__picture').src = data.avatar;
   comment.querySelector('.social__picture').alt = data.name;
   comment.querySelector('.social__text').textContent = data.message;
+
+  return comment;
 };
 
 const fillCommentsList = (data) => { //Создаем по 5 комментариев
@@ -49,7 +52,7 @@ const fillCommentsList = (data) => { //Создаем по 5 комментар�
 
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < defaultCommentCount; i++) {
-    const comment = renderOneComment(data[i]);
+    const comment = renderOneComment(data.comments);
     fragment.append(comment);
   }
 
@@ -59,7 +62,7 @@ const fillCommentsList = (data) => { //Создаем по 5 комментар�
 const showBigPictures = (data) => { //Создаем функцию для открытия картинки с комментариями
   defaultComments.innerHTML = ''; //Очищаем список комментариев
   renderBigPhoto(data); //Создаем большие фотографии
-  fillCommentsList(data.comments); //Показываем комментарии
+  fillCommentsList(data); //Показываем комментарии
 };
 
 export {showBigPictures};
