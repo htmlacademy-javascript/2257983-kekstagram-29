@@ -35,15 +35,13 @@ const generateComments = (_, index) => ({
   name: randomElement(NAMES),
 });
 
-const comments = Array.from({length: 25}, generateComments);
-
 //Генератор фото
 const generateDatasPhoto = (_, index) => ({
   id: index + 1,
   url: `photos/${index + 1}.jpg`,
   description: randomElement(DESCRIPTION),
   likes: random(15, 200),
-  comments: randomElement(comments),
+  comments: Array.from({length: random(1, 30)}, generateComments),
 });
 
 const arrayPhoto = Array.from({length: 25}, generateDatasPhoto);
