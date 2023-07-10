@@ -1,7 +1,6 @@
 import {pressEscButton} from './utils.js';
 
 const COMMENT_PER_CLICK = 5;
-let defaultCommentCount = 0;
 
 //Попап
 const bigPicture = document.querySelector('.big-picture');
@@ -16,7 +15,7 @@ const bigPictureDescription = bigPicture.querySelector('.social__caption');
 //Содержимое комментариев
 const defaultComments = document.querySelector('.social__comments');
 const commentElement = document.querySelector('.social__comment');
-// const loadCommentsButton = document.querySelector('.comments-loader');
+const loadCommentsButton = document.querySelector('.comments-loader');
 
 escButton.addEventListener('click', () => { //Закрываем фото по клику
   bigPicture.classList.add('hidden');
@@ -26,7 +25,6 @@ document.addEventListener('keydown', (evt) => { //Закрываем фото п
   if(pressEscButton(evt)) {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
-
   }
 });
 
@@ -48,11 +46,12 @@ const renderOneComment = (data) => { //Создаем 1 комментарий
 };
 
 const fillCommentsList = (data) => { //Создаем по 5 комментариев
+  let defaultCommentCount = 0;
   defaultCommentCount += COMMENT_PER_CLICK;
 
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < defaultCommentCount; i++) {
-    const comment = renderOneComment(data.comments);
+  for (let i = 0; i <= defaultCommentCount; i++) {
+    const comment = renderOneComment(data.comments[i]);
     fragment.append(comment);
   }
 
@@ -63,6 +62,7 @@ const showBigPictures = (data) => { //Создаем функцию для от�
   defaultComments.innerHTML = ''; //Очищаем список комментариев
   renderBigPhoto(data); //Создаем большие фотографии
   fillCommentsList(data); //Показываем комментарии
+  loadCommentsButton.classList.add('Click', fillCommentsList); //При нажатии на кнопку "показать еще" показываются следующие 5 фотографий
 };
 
 export {showBigPictures};

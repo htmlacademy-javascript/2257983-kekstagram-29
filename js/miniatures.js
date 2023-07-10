@@ -21,7 +21,6 @@ const createPictureList = (array) => {
     newElement.addEventListener ('click', () => { //Открываем фото
       bigPicture.classList.remove('hidden');
       showBigPictures(photo);
-      
     });
   });
 
