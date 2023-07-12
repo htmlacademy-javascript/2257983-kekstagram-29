@@ -1,2 +1,3 @@
-import './miniatures.js';
-import './big-photo.js';
+import { renderThumbnails } from './render-thumbnails.js';
+
+renderThumbnails();

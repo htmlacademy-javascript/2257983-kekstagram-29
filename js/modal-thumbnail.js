@@ -1,0 +1,100 @@
+import { isEscapeKey, isNotMessageInput } from './util.js';
+
+const COMMENTS_PER_LOAD = 5;
+
+const bigPicture = document.querySelector('.big-picture');
+const closeButton = document.querySelector('.big-picture__cancel');
+const img = document.querySelector('.big-picture__img').querySelector('img');
+const imgCaption = document.querySelector('.social__caption');
+const likesCount = document.querySelector('.likes-count');
+const commentsCount = document.querySelector('.social__comment-count');
+const commentsContainer = document.querySelector('.social__comments');
+const commentsLoadButton = document.querySelector('.comments-loader');
+const commentTemplate = document.querySelector('.social__comment');
+
+let visibleCommentsCount = 0;
+let comments;
+
+const createComment = (item) => { //Создание комментария
+  const comment = commentTemplate.cloneNode(true);
+  const commentImage = comment.querySelector('.social__picture');
+  const commentText = comment.querySelector('.social__text');
+
+  commentImage.src = item.avatar;
+  commentImage.alt = item.name;
+  commentText.textContent = item.message;
+
+  return comment;
+};
+
+const setButtonState = () => { //Скрытие кнопки 'Загрузить еще'
+  if (visibleCommentsCount >= comments.length) {
+    commentsLoadButton.classList.add('hidden');
+    return;
+  }
+  commentsLoadButton.classList.remove('hidden');
+};
+
+const updateCommentsCount = () => { //Показ комментариев 'из'
+  commentsCount.innerHTML = `${visibleCommentsCount} из ${comments.length} комментариев`;
+};
+
+const renderComments = () => { //Создание комментариев
+  const nextComments = comments.slice(visibleCommentsCount, visibleCommentsCount + COMMENTS_PER_LOAD);
+  nextComments.forEach((comment) => (commentsContainer.append(createComment(comment))));
+  visibleCommentsCount = Math.min(visibleCommentsCount + COMMENTS_PER_LOAD, comments.length);
+  setButtonState();
+  updateCommentsCount();
+};
+
+const closeBigPicture = () => { //Функция закрытия модального окна
+  visibleCommentsCount = 0;
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  closeButton.removeEventListener('click', closeButtonClickHandler);
+  document.removeEventListener('keydown', documentKeydownHandler);
+  commentsLoadButton.removeEventListener('click', commentsLoadButtonHandler);
+};
+
+function commentsLoadButtonHandler(event) { //Загрузка комментариев по кнопке
+  event.preventDefault();
+  renderComments();
+}
+
+function closeButtonClickHandler(event) { //Закрытие модального окна
+  event.preventDefault();
+  closeBigPicture();
+}
+
+function documentKeydownHandler(event) { //Закрытие модального окна по клавише
+  if (isEscapeKey(event) && isNotMessageInput(event)) {
+    event.preventDefault();
+    closeBigPicture();
+  }
+}
+
+const openBigPicture = () => { //Открытие модального окна
+  bigPicture.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', documentKeydownHandler);
+  closeButton.addEventListener('click', closeButtonClickHandler);
+  commentsLoadButton.addEventListener('click', commentsLoadButtonHandler);
+};
+
+const renderContent = (data) => { //Создание комментариев
+  img.src = data.url;
+  img.alt = data.description;
+  imgCaption.textContent = data.description;
+  likesCount.textContent = data.likes;
+  commentsCount.textContent = data.comments.length;
+  commentsContainer.innerHTML = '';
+  renderComments();
+};
+
+const renderBigPicture = (data) => {
+  comments = data.comments;
+  openBigPicture();
+  renderContent(data);
+};
+
+export { renderBigPicture };
